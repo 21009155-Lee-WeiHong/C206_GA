@@ -12,19 +12,24 @@ public class C206_CaseStudyTest {
 	private registration re2;
 
 	private ArrayList<registration> registrationList;
+	
+	private Student s1;
+	private Student s2;
+	private Student s3;
+
+	private ArrayList<Student> studentList;
 
 	private TuitionTimetable tt1;
 	private TuitionTimetable tt2;
 	private TuitionTimetable tt3;
 
 	private ArrayList<TuitionTimetable> TuitionTimetableList;
-	
+
 	private ArrayList<Tuition> tuitionList;
-		private Tuition tt4;
-		private Tuition tt5;
-		private Tuition tt6;
-		private Tuition tt7;
-		
+	private Tuition tt4;
+	private Tuition tt5;
+	private Tuition tt6;
+	private Tuition tt7;
 
 	public C206_CaseStudyTest() {
 		super();
@@ -42,14 +47,25 @@ public class C206_CaseStudyTest {
 		tt3 = new TuitionTimetable("TT003", 550, "30/10/22 09:00", "30/10/22 10:30", "Face-to-Face");
 
 		TuitionTimetableList = new ArrayList<TuitionTimetable>();
-		
+
 		tt4 = new Tuition("tt2100", "math", "math", "matrix", 120, true);
-		tt5 = new Tuition("tt2200", "geography", "humanities", "climate change", 60, true );
-		tt6 = new Tuition("tt2300", "history", "humanities", "world war 2", 120, true );
-		tt7 = new Tuition("tt2400", "english", "language", "grammer", 90, true );
-		
-		tuitionList= new ArrayList<Tuition>();
+		tt5 = new Tuition("tt2200", "geography", "humanities", "climate change", 60, true);
+		tt6 = new Tuition("tt2300", "history", "humanities", "world war 2", 120, true);
+		tt7 = new Tuition("tt2400", "english", "language", "grammer", 90, true);
+
+		tuitionList = new ArrayList<Tuition>();
 	}
+	
+	@Before
+	public void setUp1() throws Exception {
+		s1 = new Student("Timmy", "Male", "44444444", "Timmy@gmail.com", "14/02/1999", "Singapore", "Cycling");
+		s2 = new Student("Tammy", "Male", "55555555", "Tammy@gmail.com", "27/05/2001", "Singapore", "Diving");
+		// s3 = new Student("Sammy", "Male", "66666666", "Sammy@gmail.com",
+		// "06/04/2007", "Singapore", "Kayaking");
+
+		studentList = new ArrayList<Student>();
+	}
+
 
 	@After
 	public void tearDown() throws Exception {
@@ -127,6 +143,7 @@ public class C206_CaseStudyTest {
 		assertEquals("Test that registration arraylist size is 0", 0, registrationList.size());
 
 	}
+
 	@Test
 	public void testaddTuitionTimetable() {
 		// fail("Not yet implemented");
@@ -203,65 +220,112 @@ public class C206_CaseStudyTest {
 		C206_CaseStudy.deleteTuitionTimetable(TuitionTimetableList);
 		assertEquals("Test if that TuitionTimetable arraylist size is 0?", 0, TuitionTimetableList.size());
 	}
-	// by lilianne tan 
-	// add tuition 
+
+	// by lilianne tan
+	// add tuition
 	@Test
 	public void testAddTuition1() {
 		// Item list is not null, so that can add a new item - boundary
 		assertNotNull("Check if there is valid tuition arraylist to add to", tuitionList);
-		//Given an empty list, after adding 1 item, the size of the list is 1 - normal
-		//The item just added is as same as the first item of the list
+		// Given an empty list, after adding 1 item, the size of the list is 1 - normal
+		// The item just added is as same as the first item of the list
 		C206_CaseStudy.addTuition(tuitionList, tt4);
 		assertEquals("Check that Tuition arraylist size is 1", 1, tuitionList.size());
 		assertSame("Check that Tuition is added", tt4, tuitionList.get(0));
-		
-		//Add another item. test The size of the list is 2? -normal
-		//The item just added is as same as the second item of the list
+
+		// Add another item. test The size of the list is 2? -normal
+		// The item just added is as same as the second item of the list
 		C206_CaseStudy.addTuition(tuitionList, tt5);
 		assertEquals("Check that Tuition arraylist size is 2", 2, tuitionList.size());
 		assertSame("Check that Tuition is added", tt5, tuitionList.get(1));
-		
+
 	}
-	
-	// by lilianne tan 
+
+	// by lilianne tan
 	@Test
 	public void testRetrieveAllTuition() {
 		// Test if Item list is not null but empty -boundary
 		assertNotNull("Test if there is valid Tuition arraylist to retrieve item", tuitionList);
-		
-		//test if the list of tuition retrieved from the SourceCentre is empty - boundary
-		String allTuition= C206_CaseStudy.retrieveAllTuition(tuitionList);
+
+		// test if the list of tuition retrieved from the SourceCentre is empty -
+		// boundary
+		String allTuition = C206_CaseStudy.retrieveAllTuition(tuitionList);
 		String testOutput = "";
 		assertEquals("Check that ViewAlltuitionlist", testOutput, allTuition);
-		
-		//Given an empty list, after adding 2 items, test if the size of the list is 2 - normal
+
+		// Given an empty list, after adding 2 items, test if the size of the list is 2
+		// - normal
 		C206_CaseStudy.addTuition(tuitionList, tt4);
 		C206_CaseStudy.addTuition(tuitionList, tt5);
 		assertEquals("Test that Tuition arraylist size is 2", 2, tuitionList.size());
-		
-		//test if the expected output string same as the list of tuition retrieved from the SourceCentre	
-		allTuition= C206_CaseStudy.retrieveAllTuition(tuitionList);
-		testOutput = String.format("%-20s %-20s %-20s %-20s %-20d %-20s\n", "tt2100", "math", "math", "matrix", 120, true);
-		testOutput += String.format("%-20s %-20s %-20s %-20s %-20d %-20s\n", "tt2200", "geography", "humanities", "climate change", 60, true  );
-	
+
+		// test if the expected output string same as the list of tuition retrieved from
+		// the SourceCentre
+		allTuition = C206_CaseStudy.retrieveAllTuition(tuitionList);
+		testOutput = String.format("%-20s %-20s %-20s %-20s %-20d %-20s\n", "tt2100", "math", "math", "matrix", 120,
+				true);
+		testOutput += String.format("%-20s %-20s %-20s %-20s %-20d %-20s\n", "tt2200", "geography", "humanities",
+				"climate change", 60, true);
+
 		assertEquals("Test that ViewAllTuitionlist", testOutput, allTuition);
-		
-		}
-	//by lilianne tan 
-	//delete tuition 
+
+	}
+
+	// by lilianne tan
+	// delete tuition
 	@Test
 	public void testdeletetuition() {
-	    //boundary - Test if Item list is not null but empty
-	    assertNotNull("Test if there is valid Tuition arraylist to delete", tuitionList);
-	    //Normal - tuition with id "tt2100" is deleted 
-	    C206_CaseStudy.addTuition(tuitionList, tt4);
-	    Boolean isdeleted = C206_CaseStudy.deleteTuition(tuitionList,"tt2100");
-	    assertTrue(isdeleted);
-	  
-	    //Error - Test that non-existing item cannot be delete
-	    isdeleted = C206_CaseStudy.deleteTuition(tuitionList, "tt9999");
-	    assertFalse(isdeleted);
-	  }
-	
+		// boundary - Test if Item list is not null but empty
+		assertNotNull("Test if there is valid Tuition arraylist to delete", tuitionList);
+		// Normal - tuition with id "tt2100" is deleted
+		C206_CaseStudy.addTuition(tuitionList, tt4);
+		Boolean isdeleted = C206_CaseStudy.deleteTuition(tuitionList, "tt2100");
+		assertTrue(isdeleted);
+
+		// Error - Test that non-existing item cannot be delete
+		isdeleted = C206_CaseStudy.deleteTuition(tuitionList, "tt9999");
+		assertFalse(isdeleted);
+	}
+
+	//bhav
+	@Test
+	public void testRegStudent() {
+		// fail("Not yet implemented");
+		assertNotNull("Test if there is a valid Student arraylist to add to", studentList);
+		StudentMain.addStudent(studentList, s1);
+		// test that after s1 is added the arraylist consists of s1
+		assertEquals("Test if the Student arrayList size is 1?", s1, studentList.get(0));
+		// test that after adding s2 size of arraylist is 2
+		StudentMain.addStudent(studentList, s2);
+		StudentMain.addStudent(studentList, s3);
+		assertEquals("Test that Chromebook arraylist size is 3?", 3, studentList.size());
+		assertSame("Test that Chromebook is added same as 3rd item of the list?", s3, studentList.get(2));
+	}
+
+	@Test
+	public void testDoDeleteStudent() {
+		// boundary
+		assertNotNull("test if there is valid Student arraylist to delete from", studentList);
+		StudentMain.addStudent(studentList, s1);
+		StudentMain.addStudent(studentList, s2);
+		// StudentMain.addStudent(studentList, s3);
+
+		// delete another item. The size of list is 1?
+		StudentMain.doDeleteStudent(studentList, "Timmy");
+		assertEquals("Test that student arraylist size is 1", 1, studentList.size());
+
+		// normal
+		StudentMain.doDeleteStudent(studentList, "Tammy");
+		assertEquals("Test that student arraylist size is 0", 0, studentList.size());
+
+	}
+
+	@After
+	public void tearDown1() throws Exception {
+		s1 = null;
+		s2 = null;
+		// s3 = null;
+		studentList = null;
+	}
 
 }
