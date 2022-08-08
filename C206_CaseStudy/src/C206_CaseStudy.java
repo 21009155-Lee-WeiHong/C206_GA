@@ -15,11 +15,11 @@ public class C206_CaseStudy {
 			} else if (option == 2) { // Faith
 				timetable();
 			} else if (option == 3) { // Lilianne
-
+				tuition();
 			} else if (option == 4) { // Bhavana
 
 			} else if (option == 5) { // WeiHong
-
+				
 			} else {
 				System.out.println("Invalid type");
 			}
@@ -252,4 +252,122 @@ public class C206_CaseStudy {
 		}
 		return isDeleted;
 	}
+	ArrayList<Tuition> tuitionList = new ArrayList<Tuition>();
+
+	
+	private static void tuition() {
+		// TODO Auto-generated method stub
+		
+		
+int option = 0;
+{
+
+while (option != 4) {
+ArrayList<Tuition> tuitionList = new ArrayList<Tuition>();
+	
+  menu2();
+  option = Helper.readInt("Enter an option > ");
+  
+  if (option == 1) {
+    // add tuition
+    TuitionCentre.setHeader("ADD");
+    Tuition ttn = TuitionCentre.inputTuition();
+    TuitionCentre.addTuition(tuitionList, ttn);
+    
+  
+    
+  }
+  
+  else if (option == 2) {
+    // view tuition
+    TuitionCentre.viewAllTuition(tuitionList);
+  }
+  
+  else if (option == 3) {
+    // delete tuition
+	 String table = Helper.readString("Enter the tuition timetable id that you want to delete > ");
+    TuitionCentre.deleteTuition(tuitionList, table);
+  }
+  
+  else if (option == 4) {
+    System.out.println("Bye");
+  }
+  
+  else {
+    System.out.println("Invalid option");
+  }
+  
 }
+
+}
+  
+
+}
+public static void menu2() {
+	System.out.println("Tuition");
+	System.out.println("1. Add tuition");
+	System.out.println("2. view tuiton");
+	System.out.println("3. delete tuition");
+	System.out.println("4. Quit");
+	Helper.line(80, "-");
+}
+
+
+
+//add tuition
+		 public static Tuition inputTuition() { 
+			  String tuitioncode = Helper.readString("Enter tuition code > "); 
+			  String tuitiontitle = Helper.readString("Enter title > "); 
+			  String groupname = Helper.readString("Enter subject group name > "); 
+			  String tuitiondescription = Helper.readString("Enter tuition description > "); 
+			  int duration = Helper.readInt("Enter duration > "); 
+			  Boolean prerequisite = Helper.readBoolean("Enter pre-requisite > "); 
+			 
+			  Tuition tt = new Tuition(tuitioncode, tuitiontitle, groupname, tuitiondescription, duration, prerequisite); 
+			  return tt; 
+			 } 
+			  
+			 public static void addTuition(ArrayList<Tuition> tuitionList, Tuition tt) { 
+			  tuitionList.add(tt); 
+			 } 
+			 // view tuition
+			//view tuition
+			 public static String retrieveAllTuition(ArrayList<Tuition> tuitionList) {
+					String output = "";
+
+					for (int i = 0; i < tuitionList.size(); i++) {
+
+						output += String.format("%-20s %-20s %-20s %-20s %-20d %-20s\n", tuitionList.get(i).getTuitioncode(),
+								tuitionList.get(i).getTuitiontitle(), tuitionList.get(i).getGroupname(), tuitionList.get(i).getTuitiondescription(),tuitionList.get(i).getTuitionduration(), tuitionList.get(i).isPrerequisite());
+					}
+					return output;
+				}
+			 
+			 public static void viewAllTuition(ArrayList<Tuition> tuitionList) {
+					TuitionCentre.setHeader("Tuition LIST");
+					String output = String.format("%-20s %-20s %-20s %-20s %-20s %-20s\n", "TUITION CODE", "TUITION TITLE",
+							"TUITION GROUP NAME", "TUITION DESCRIPTION","TUITION DURATION", "PRE-REQUISITE");
+					output += retrieveAllTuition(tuitionList);	
+					System.out.println(output);
+				}
+			 //delete tuition
+			 public static boolean deleteTuition(ArrayList<Tuition> tuitionList, String table) {
+			      boolean doesDelete = false;
+			      
+			      for (int i = 0; i < tuitionList.size(); i++) { 
+			        String tuitioncode = tuitionList.get(i).getTuitioncode();
+			           if (tuitioncode.contentEquals(table)) { 
+			             tuitionList.remove(tuitionList.get(i)); 
+			            System.out.println("Tuition code " + table + " deleted!"); 
+			            doesDelete = true; 
+			           } 
+			          } 
+			          if (doesDelete == false) { 
+			           System.out.println("Invalid tuition code."); 
+			          }
+					return doesDelete; 
+			           
+			         }
+		
+}
+

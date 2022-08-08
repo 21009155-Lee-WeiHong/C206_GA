@@ -18,6 +18,13 @@ public class C206_CaseStudyTest {
 	private TuitionTimetable tt3;
 
 	private ArrayList<TuitionTimetable> TuitionTimetableList;
+	
+	private ArrayList<Tuition> tuitionList;
+		private Tuition tt4;
+		private Tuition tt5;
+		private Tuition tt6;
+		private Tuition tt7;
+		
 
 	public C206_CaseStudyTest() {
 		super();
@@ -35,7 +42,13 @@ public class C206_CaseStudyTest {
 		tt3 = new TuitionTimetable("TT003", 550, "30/10/22 09:00", "30/10/22 10:30", "Face-to-Face");
 
 		TuitionTimetableList = new ArrayList<TuitionTimetable>();
-
+		
+		tt4 = new Tuition("tt2100", "math", "math", "matrix", 120, true);
+		tt5 = new Tuition("tt2200", "geography", "humanities", "climate change", 60, true );
+		tt6 = new Tuition("tt2300", "history", "humanities", "world war 2", 120, true );
+		tt7 = new Tuition("tt2400", "english", "language", "grammer", 90, true );
+		
+		tuitionList= new ArrayList<Tuition>();
 	}
 
 	@After
@@ -114,7 +127,7 @@ public class C206_CaseStudyTest {
 		assertEquals("Test that registration arraylist size is 0", 0, registrationList.size());
 
 	}
-
+	@Test
 	public void testaddTuitionTimetable() {
 		// fail("Not yet implemented");
 		// write your code here
@@ -123,7 +136,7 @@ public class C206_CaseStudyTest {
 
 		// Given an empty list, after adding 1 TuitionTimetable, the size of the list is
 		// 1
-		TuitionTimetableMain.addTuitionTimetable(TuitionTimetableList, tt1);
+		C206_CaseStudy.addTuitionTimetable(TuitionTimetableList, tt1);
 		assertEquals("Test if that TuitionTimetable arraylist size is 1?", 1, TuitionTimetableList.size());
 
 		// The TuitionTimetable just added is as same as the first item of the list
@@ -131,8 +144,8 @@ public class C206_CaseStudyTest {
 				TuitionTimetableList.get(0));
 
 		// Add another TuitionTimetable. test The size of the list is 3?
-		TuitionTimetableMain.addTuitionTimetable(TuitionTimetableList, tt2);
-		TuitionTimetableMain.addTuitionTimetable(TuitionTimetableList, tt3);
+		C206_CaseStudy.addTuitionTimetable(TuitionTimetableList, tt2);
+		C206_CaseStudy.addTuitionTimetable(TuitionTimetableList, tt3);
 		assertEquals("Test that TuitionTimetable arraylist size is 3?", 3, TuitionTimetableList.size());
 	}
 
@@ -143,19 +156,19 @@ public class C206_CaseStudyTest {
 		assertNotNull("Test if there is valid TuitionTimetable arraylist to add to", TuitionTimetableList);
 
 		// test if the list of TuitionTimetable retrieved from the SourceCentre is empty
-		String allTuitionTimetable = TuitionTimetableMain.retrieveAllTuitionTimetable(TuitionTimetableList);
+		String allTuitionTimetable = C206_CaseStudy.retrieveAllTuitionTimetable(TuitionTimetableList);
 		String testOutput = "";
 		assertEquals("Check that ViewAllTimetableList", testOutput, allTuitionTimetable);
 
 		// Given an empty list, after adding 2 items, test if the size of the list is 3
-		TuitionTimetableMain.addTuitionTimetable(TuitionTimetableList, tt1);
-		TuitionTimetableMain.addTuitionTimetable(TuitionTimetableList, tt2);
-		TuitionTimetableMain.addTuitionTimetable(TuitionTimetableList, tt3);
+		C206_CaseStudy.addTuitionTimetable(TuitionTimetableList, tt1);
+		C206_CaseStudy.addTuitionTimetable(TuitionTimetableList, tt2);
+		C206_CaseStudy.addTuitionTimetable(TuitionTimetableList, tt3);
 		assertEquals("Test if that TuitionTimetable arraylist size is 3?", 3, TuitionTimetableList.size());
 
 		// test if the expected output string same as the list of TuitionTimetable
 		// retrieved from the SourceCentre
-		allTuitionTimetable = TuitionTimetableMain.retrieveAllTuitionTimetable(TuitionTimetableList);
+		allTuitionTimetable = C206_CaseStudy.retrieveAllTuitionTimetable(TuitionTimetableList);
 
 		testOutput = String.format("%-30s %-20s %-20s %-20s %-20s\n", "TT001", 450.0, "28/10/22 09:00",
 				"28/10/22 10:30", "Face-to-Face");
@@ -174,21 +187,81 @@ public class C206_CaseStudyTest {
 		// write your code here
 		// Can add new items
 		assertNotNull("Test if there is valid tuition timetable arraylist to delete from", TuitionTimetableList);
-		TuitionTimetableMain.addTuitionTimetable(TuitionTimetableList, tt2);
-		TuitionTimetableMain.addTuitionTimetable(TuitionTimetableList, tt3);
-		TuitionTimetableMain.addTuitionTimetable(TuitionTimetableList, tt1);
+		C206_CaseStudy.addTuitionTimetable(TuitionTimetableList, tt2);
+		C206_CaseStudy.addTuitionTimetable(TuitionTimetableList, tt3);
+		C206_CaseStudy.addTuitionTimetable(TuitionTimetableList, tt1);
 
 		// Delete another item. The size of the list is 2?
-		TuitionTimetableMain.deleteTuitionTimetable(TuitionTimetableList);
+		C206_CaseStudy.deleteTuitionTimetable(TuitionTimetableList);
 		assertEquals("Test that TuitionTimetable arraylist size is 2?", 2, TuitionTimetableList.size());
 
 		// Delete another item. The size of the list is 1?
-		TuitionTimetableMain.deleteTuitionTimetable(TuitionTimetableList);
+		C206_CaseStudy.deleteTuitionTimetable(TuitionTimetableList);
 		assertEquals("Test if that TuitionTimetable arraylist size is 1?", 1, TuitionTimetableList.size());
 
 		// Delete another item. The size of the list is 0?
-		TuitionTimetableMain.deleteTuitionTimetable(TuitionTimetableList);
+		C206_CaseStudy.deleteTuitionTimetable(TuitionTimetableList);
 		assertEquals("Test if that TuitionTimetable arraylist size is 0?", 0, TuitionTimetableList.size());
 	}
+	// by lilianne tan 
+	// add tuition 
+	@Test
+	public void testAddTuition1() {
+		// Item list is not null, so that can add a new item - boundary
+		assertNotNull("Check if there is valid tuition arraylist to add to", tuitionList);
+		//Given an empty list, after adding 1 item, the size of the list is 1 - normal
+		//The item just added is as same as the first item of the list
+		C206_CaseStudy.addTuition(tuitionList, tt4);
+		assertEquals("Check that Tuition arraylist size is 1", 1, tuitionList.size());
+		assertSame("Check that Tuition is added", tt4, tuitionList.get(0));
+		
+		//Add another item. test The size of the list is 2? -normal
+		//The item just added is as same as the second item of the list
+		C206_CaseStudy.addTuition(tuitionList, tt5);
+		assertEquals("Check that Tuition arraylist size is 2", 2, tuitionList.size());
+		assertSame("Check that Tuition is added", tt5, tuitionList.get(1));
+		
+	}
+	
+	// by lilianne tan 
+	@Test
+	public void testRetrieveAllTuition() {
+		// Test if Item list is not null but empty -boundary
+		assertNotNull("Test if there is valid Tuition arraylist to retrieve item", tuitionList);
+		
+		//test if the list of tuition retrieved from the SourceCentre is empty - boundary
+		String allTuition= C206_CaseStudy.retrieveAllTuition(tuitionList);
+		String testOutput = "";
+		assertEquals("Check that ViewAlltuitionlist", testOutput, allTuition);
+		
+		//Given an empty list, after adding 2 items, test if the size of the list is 2 - normal
+		C206_CaseStudy.addTuition(tuitionList, tt4);
+		C206_CaseStudy.addTuition(tuitionList, tt5);
+		assertEquals("Test that Tuition arraylist size is 2", 2, tuitionList.size());
+		
+		//test if the expected output string same as the list of tuition retrieved from the SourceCentre	
+		allTuition= C206_CaseStudy.retrieveAllTuition(tuitionList);
+		testOutput = String.format("%-20s %-20s %-20s %-20s %-20d %-20s\n", "tt2100", "math", "math", "matrix", 120, true);
+		testOutput += String.format("%-20s %-20s %-20s %-20s %-20d %-20s\n", "tt2200", "geography", "humanities", "climate change", 60, true  );
+	
+		assertEquals("Test that ViewAllTuitionlist", testOutput, allTuition);
+		
+		}
+	//by lilianne tan 
+	//delete tuition 
+	@Test
+	public void testdeletetuition() {
+	    //boundary - Test if Item list is not null but empty
+	    assertNotNull("Test if there is valid Tuition arraylist to delete", tuitionList);
+	    //Normal - tuition with id "tt2100" is deleted 
+	    C206_CaseStudy.addTuition(tuitionList, tt4);
+	    Boolean isdeleted = C206_CaseStudy.deleteTuition(tuitionList,"tt2100");
+	    assertTrue(isdeleted);
+	  
+	    //Error - Test that non-existing item cannot be delete
+	    isdeleted = C206_CaseStudy.deleteTuition(tuitionList, "tt9999");
+	    assertFalse(isdeleted);
+	  }
+	
 
 }
