@@ -16,7 +16,7 @@ public class C206_CaseStudy {
 				timetable();
 			} else if (option == 3) { // Lilianne
 				tuition();
-			} else if (option == 4) { // Bhavanaa
+			} else if (option == 4) { // Bhavanaaa
 				StudentMain();
 			} else if (option == 5) { // WeiHong
 
